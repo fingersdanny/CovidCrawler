@@ -18,8 +18,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class PdfExporter {
-    public static void generateCovidListPdf(List<CovidStatus> covidStatusList, String fileName) throws FileNotFoundException {
-        PdfWriter writer = new PdfWriter(fileName);
+    public static void generateCovidListPdf(List<CovidStatus> covidStatusList, String destination) throws FileNotFoundException {
+        PdfWriter writer = new PdfWriter(destination);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
         document.setFontSize(15);

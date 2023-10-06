@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class ExcelExporter {
-    public static void generateCovidListExcel(List<CovidStatus> covidStatusList, String fileName){
+    public static void generateCovidListExcel(List<CovidStatus> covidStatusList, String destination){
         try {
             XSSFWorkbook workbook = new XSSFWorkbook();
             Sheet sheet = workbook.createSheet("코로나 현황");
@@ -38,7 +38,7 @@ public class ExcelExporter {
                 row.createCell(0).setCellValue(covidStatus.getTotalOccurrence());
             }
 
-            FileOutputStream outputStream = new FileOutputStream(new File(fileName + ".xlsx"));
+            FileOutputStream outputStream = new FileOutputStream(new File(destination));
             workbook.write(outputStream);
             workbook.close();
         } catch (IOException e) {
