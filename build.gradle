@@ -16,6 +16,7 @@ dependencies {
     implementation 'com.itextpdf:itext7-core:7.1.15'
     implementation 'org.apache.poi:poi-ooxml:5.2.0'
     implementation 'org.apache.poi:poi:5.2.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.13.0'
 }
 
 test {
