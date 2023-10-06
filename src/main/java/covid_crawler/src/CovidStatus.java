@@ -12,6 +12,10 @@ public class CovidStatus {
     private int totalDeceased;
     private int totalOccurrence;
 
+    public CovidStatus() {
+
+    }
+
     public CovidStatus(String city, int dailyTotal, int domesticOriented, int foreignOriented, int totalConfirmed, int totalDeceased, int totalOccurrence) {
         this.city = city;
         this.dailyTotal = dailyTotal;
