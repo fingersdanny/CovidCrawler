@@ -49,14 +49,7 @@ public class PdfExporter {
         table.addHeaderCell(createCell("사망자", true));
         table.addHeaderCell(createCell("발생률", true));
 
-        CovidStatus totalCovidStatus = new CovidStatus();
-        totalCovidStatus.setCity("합계");
-        totalCovidStatus.setDailyTotal(covidStatusList.stream().map(CovidStatus::getDailyTotal).reduce(0, Integer::sum));
-        totalCovidStatus.setDomesticOriented(covidStatusList.stream().map(CovidStatus::getDomesticOriented).reduce(0, Integer::sum));
-        totalCovidStatus.setForeignOriented(covidStatusList.stream().map(CovidStatus::getForeignOriented).reduce(0, Integer::sum));
-        totalCovidStatus.setTotalConfirmed(covidStatusList.stream().map(CovidStatus::getTotalConfirmed).reduce(0, Integer::sum));
-        totalCovidStatus.setTotalDeceased(covidStatusList.stream().map(CovidStatus::getTotalDeceased).reduce(0, Integer::sum));
-        totalCovidStatus.setTotalOccurrence(covidStatusList.stream().map(CovidStatus::getTotalOccurrence).reduce(0, Integer::sum));
+        CovidStatus totalCovidStatus = CovidStatusUtility.getTotalCovidStatus(covidStatusList);
         covidStatusList.add(0, totalCovidStatus);
 
         for (CovidStatus covidStatus : covidStatusList) {
