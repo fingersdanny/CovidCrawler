@@ -1,8 +1,5 @@
 package covid_crawler.src;
 
-/**
-* totalOccurrence는 10만명당 발생률입니다.
- */
 public class CovidStatus {
     private String city;
     private int dailyTotal;
