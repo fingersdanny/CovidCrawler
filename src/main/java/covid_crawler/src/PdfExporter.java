@@ -42,24 +42,21 @@ public class PdfExporter {
         table.setMarginTop(15);
 
         table.addHeaderCell(createCell("시도", true));
-        table.addHeaderCell(createCell("합계", true));
-        table.addHeaderCell(createCell("국내발생", true));
+        table.addHeaderCell(createCell("일일확진", true));
+        table.addHeaderCell(createCell("일일사망", true));
         table.addHeaderCell(createCell("해외유입", true));
         table.addHeaderCell(createCell("확진환자", true));
         table.addHeaderCell(createCell("사망자", true));
         table.addHeaderCell(createCell("발생률", true));
 
-        CovidStatus totalCovidStatus = CovidStatusUtility.getTotalCovidStatus(covidStatusList);
-        covidStatusList.add(0, totalCovidStatus);
-
         for (CovidStatus covidStatus : covidStatusList) {
             table.addCell(createCell(covidStatus.getCity(), false));
             table.addCell(createCell(covidStatus.getDailyTotal(), false));
+            table.addCell(createCell(covidStatus.getDailyDeceased(), false));
             table.addCell(createCell(covidStatus.getDomesticOriented(), false));
             table.addCell(createCell(covidStatus.getForeignOriented(), false));
             table.addCell(createCell(covidStatus.getTotalConfirmed(), false));
             table.addCell(createCell(covidStatus.getTotalDeceased(), false));
-            table.addCell(createCell(covidStatus.getTotalOccurrence(), false));
         }
 
         document.add(table);

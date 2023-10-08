@@ -16,26 +16,23 @@ public class ExcelExporter {
             Sheet sheet = workbook.createSheet("코로나 현황");
             Row headerRow = sheet.createRow(0);
             headerRow.createCell(0).setCellValue("시도");
-            headerRow.createCell(1).setCellValue("합계");
+            headerRow.createCell(1).setCellValue("일일확진");
+            headerRow.createCell(2).setCellValue("일일사망");
             headerRow.createCell(2).setCellValue("국내발생");
             headerRow.createCell(3).setCellValue("해외유입");
             headerRow.createCell(4).setCellValue("확진환자");
             headerRow.createCell(5).setCellValue("사망자");
-            headerRow.createCell(6).setCellValue("발생률");
-
-            CovidStatus totalCovidStatus = CovidStatusUtility.getTotalCovidStatus(covidStatusList);
-            covidStatusList.add(0, totalCovidStatus);
 
             for (int i = 0; i < covidStatusList.size(); i++) {
                 CovidStatus covidStatus = covidStatusList.get(i);
                 Row row = sheet.createRow(i + 1);
                 row.createCell(0).setCellValue(covidStatus.getCity());
-                row.createCell(0).setCellValue(covidStatus.getDailyTotal());
-                row.createCell(0).setCellValue(covidStatus.getDomesticOriented());
-                row.createCell(0).setCellValue(covidStatus.getForeignOriented());
-                row.createCell(0).setCellValue(covidStatus.getTotalConfirmed());
-                row.createCell(0).setCellValue(covidStatus.getTotalDeceased());
-                row.createCell(0).setCellValue(covidStatus.getTotalOccurrence());
+                row.createCell(1).setCellValue(covidStatus.getDailyTotal());
+                row.createCell(2).setCellValue(covidStatus.getDailyDeceased());
+                row.createCell(3).setCellValue(covidStatus.getDomesticOriented());
+                row.createCell(4).setCellValue(covidStatus.getForeignOriented());
+                row.createCell(5).setCellValue(covidStatus.getTotalConfirmed());
+                row.createCell(6).setCellValue(covidStatus.getTotalDeceased());
             }
 
             FileOutputStream outputStream = new FileOutputStream(new File(destination));
