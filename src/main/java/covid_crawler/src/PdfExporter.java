@@ -62,10 +62,10 @@ public class PdfExporter {
         table.addHeaderCell(createCell("시도", true));
         table.addHeaderCell(createCell("일일확진", true));
         table.addHeaderCell(createCell("일일사망", true));
+        table.addHeaderCell(createCell("국내발생", true));
         table.addHeaderCell(createCell("해외유입", true));
-        table.addHeaderCell(createCell("확진환자", true));
-        table.addHeaderCell(createCell("사망자", true));
-        table.addHeaderCell(createCell("발생률", true));
+        table.addHeaderCell(createCell("누적확진", true));
+        table.addHeaderCell(createCell("누적사망", true));
     }
 
     private static void addNewRow(Table table, CovidStatus covidStatus) {
