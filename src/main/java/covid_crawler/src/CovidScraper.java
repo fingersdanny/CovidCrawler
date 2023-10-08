@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class CovidScraper {
         String date = driver.findElement(By.id("dashboardDate")).getText();
         String[] dates = date.split(" ");
         String fileName = "covid_status_" + dates[0].replace("(", "") + "_" + dates[1] + "_" + dates[2] + "_00시_기준";
-
+        Actions scroll = new Actions(driver).scrollByAmount(0, 200);
         covidStatusList.add(getCovidStatus(driver));
         for (String cityIndex : cityIds) {
             try {
