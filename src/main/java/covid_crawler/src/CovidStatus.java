@@ -78,4 +78,17 @@ public class CovidStatus {
     public void setDailyDeceased(int dailyDeceased) {
         this.dailyDeceased = dailyDeceased;
     }
+
+    @Override
+    public String toString() {
+        return "CovidStatus{" +
+                "city='" + city + '\'' +
+                ", dailyTotal=" + dailyTotal +
+                ", dailyDeceased=" + dailyDeceased +
+                ", domesticOriented=" + domesticOriented +
+                ", foreignOriented=" + foreignOriented +
+                ", totalConfirmed=" + totalConfirmed +
+                ", totalDeceased=" + totalDeceased +
+                '}';
+    }
 }
