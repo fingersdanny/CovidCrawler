@@ -21,7 +21,6 @@ public class CovidScraper {
         driver.get(URL);
         List<CovidStatus> covidStatusList = new ArrayList<>();
         String date = driver.findElement(By.id("dashboardDate")).getText();
-        System.out.println(date);
         String[] dates = date.split(" ");
         String fileName = "covid_status_" + dates[0].replace("(", "") + "_" + dates[1] + "_" + dates[2] + "_00시_기준";
 
