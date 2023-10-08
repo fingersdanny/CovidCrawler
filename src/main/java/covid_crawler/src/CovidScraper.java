@@ -27,7 +27,6 @@ public class CovidScraper {
 
         covidStatusList.add(getCovidStatus(driver));
         for (String cityIndex : cityIds) {
-
             try {
                 driver.findElement(By.id(cityIndex)).click();
                 CovidStatus curCovidStatus = getCovidStatus(driver);
