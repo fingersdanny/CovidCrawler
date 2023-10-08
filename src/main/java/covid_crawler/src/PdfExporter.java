@@ -18,29 +18,47 @@ import java.io.IOException;
 import java.util.List;
 
 public class PdfExporter {
-    public static void generateCovidListPdf(List<CovidStatus> covidStatusList, String destination) throws FileNotFoundException {
-        PdfWriter writer = new PdfWriter(destination);
-        PdfDocument pdf = new PdfDocument(writer);
-        Document document = new Document(pdf);
-        document.setFontSize(15);
-        PdfFont font = null;
+    public static void generateCovidListPdf(List<CovidStatus> covidStatusList, String destination, String date) throws FileNotFoundException {
         try {
-            font = PdfFontFactory.createFont("NanumBarunGothicBold.otf", PdfEncodings.IDENTITY_H, true);
-        } catch (IOException e) {
+            PdfWriter writer = new PdfWriter(destination);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+            document.setFontSize(15);
+            PdfFont font = null;
+            try {
+                font = PdfFontFactory.createFont("NanumBarunGothicBold.otf", PdfEncodings.IDENTITY_H, true);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            setTitle(date, document, font);
+
+            Table table = new Table(UnitValue.createPercentArray(new float[]{2, 2, 2, 2, 2, 2, 2}));
+            table.setWidth(UnitValue.createPercentValue(100));
+            table.setMarginTop(15);
+
+            createHeader(table);
+
+            for (CovidStatus covidStatus : covidStatusList) {
+                addNewRow(table, covidStatus);
+            }
+
+            document.add(table);
+            document.close();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private static void setTitle(String date, Document document, PdfFont font) {
         document.setFont(font);
-        //날짜 받아와서 넣을 것
-        Paragraph titleParagraph = new Paragraph("");
+        Paragraph titleParagraph = new Paragraph(date);
         titleParagraph.setFontSize(12);
         titleParagraph.setTextAlignment(TextAlignment.LEFT);
         titleParagraph.setBold();
         document.add(titleParagraph);
+    }
 
-        Table table = new Table(UnitValue.createPercentArray(new float[]{2, 2, 2, 2}));
-        table.setWidth(UnitValue.createPercentValue(100));
-        table.setMarginTop(15);
-
+    private static void createHeader(Table table) {
         table.addHeaderCell(createCell("시도", true));
         table.addHeaderCell(createCell("일일확진", true));
         table.addHeaderCell(createCell("일일사망", true));
@@ -48,19 +66,16 @@ public class PdfExporter {
         table.addHeaderCell(createCell("확진환자", true));
         table.addHeaderCell(createCell("사망자", true));
         table.addHeaderCell(createCell("발생률", true));
+    }
 
-        for (CovidStatus covidStatus : covidStatusList) {
-            table.addCell(createCell(covidStatus.getCity(), false));
-            table.addCell(createCell(covidStatus.getDailyTotal(), false));
-            table.addCell(createCell(covidStatus.getDailyDeceased(), false));
-            table.addCell(createCell(covidStatus.getDomesticOriented(), false));
-            table.addCell(createCell(covidStatus.getForeignOriented(), false));
-            table.addCell(createCell(covidStatus.getTotalConfirmed(), false));
-            table.addCell(createCell(covidStatus.getTotalDeceased(), false));
-        }
-
-        document.add(table);
-        document.close();
+    private static void addNewRow(Table table, CovidStatus covidStatus) {
+        table.addCell(createCell(covidStatus.getCity(), false));
+        table.addCell(createCell(covidStatus.getDailyTotal(), false));
+        table.addCell(createCell(covidStatus.getDailyDeceased(), false));
+        table.addCell(createCell(covidStatus.getDomesticOriented(), false));
+        table.addCell(createCell(covidStatus.getForeignOriented(), false));
+        table.addCell(createCell(covidStatus.getTotalConfirmed(), false));
+        table.addCell(createCell(covidStatus.getTotalDeceased(), false));
     }
 
     private static Cell createCell(Object content, boolean isHeader) {
