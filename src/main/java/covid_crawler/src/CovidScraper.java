@@ -5,6 +5,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +16,14 @@ public class CovidScraper {
                                     , "V38", "V39"};
     private static final String URL = "https://kosis.kr/covid/covid_index.do";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         WebDriver driver = new ChromeDriver();
         driver.get(URL);
         List<CovidStatus> covidStatusList = new ArrayList<>();
+        String date = driver.findElement(By.id("dashboardDate")).getText();
+        System.out.println(date);
+        String[] dates = date.split(" ");
+        String fileName = "covid_status_" + dates[0].replace("(", "") + "_" + dates[1] + "_" + dates[2] + "_00시_기준";
 
         covidStatusList.add(getCovidStatus(driver));
         for (String cityIndex : cityIds) {
@@ -37,6 +42,8 @@ public class CovidScraper {
             System.out.println(cs.toString());
         }
         driver.close();
+        ExcelExporter.generateCovidListExcel(covidStatusList, fileName + ".xlsx");
+        PdfExporter.generateCovidListPdf(covidStatusList, fileName + ".pdf", date);
     }
 
     private static CovidStatus getCovidStatus(WebDriver driver) {
