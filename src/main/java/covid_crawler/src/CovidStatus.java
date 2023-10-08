@@ -3,24 +3,24 @@ package covid_crawler.src;
 public class CovidStatus {
     private String city;
     private int dailyTotal;
+    private int dailyDeceased;
     private int domesticOriented;
     private int foreignOriented;
     private int totalConfirmed;
     private int totalDeceased;
-    private int totalOccurrence;
 
     public CovidStatus() {
 
     }
 
-    public CovidStatus(String city, int dailyTotal, int domesticOriented, int foreignOriented, int totalConfirmed, int totalDeceased, int totalOccurrence) {
+    public CovidStatus(String city, int dailyTotal, int dailyDeceased, int domesticOriented, int foreignOriented, int totalConfirmed, int totalDeceased) {
         this.city = city;
         this.dailyTotal = dailyTotal;
+        this.dailyDeceased = dailyDeceased;
         this.domesticOriented = domesticOriented;
         this.foreignOriented = foreignOriented;
         this.totalConfirmed = totalConfirmed;
         this.totalDeceased = totalDeceased;
-        this.totalOccurrence = totalOccurrence;
     }
 
     public String getCity() {
@@ -71,11 +71,11 @@ public class CovidStatus {
         this.totalDeceased = totalDeceased;
     }
 
-    public int getTotalOccurrence() {
-        return totalOccurrence;
+    public int getDailyDeceased() {
+        return dailyDeceased;
     }
 
-    public void setTotalOccurrence(int totalOccurrence) {
-        this.totalOccurrence = totalOccurrence;
+    public void setDailyDeceased(int dailyDeceased) {
+        this.dailyDeceased = dailyDeceased;
     }
 }
