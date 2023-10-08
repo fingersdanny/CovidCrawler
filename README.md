@@ -103,3 +103,5 @@ public class CovidScraper {
 #### Excel
 ![Excel 결과물](src/main/java/covid_crawler/images/covid_status_xlsx.PNG)
 ### 실행 영상
+![실행 영상](src/main/java/covid_crawler/images/covid_crawler_running.gif)
+> 더 화질이 높은 실행 영상은 [여기서](https://drive.google.com/file/d/1WIsoNNQx17GBcD_BLozoNpW_rVTYc6US/view?usp=drive_link) 확인하실 수 있습니다.
