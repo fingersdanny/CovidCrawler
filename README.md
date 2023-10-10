@@ -19,7 +19,8 @@ itextpdf = 7.1.15
 poi = 5.2.0
 poi-ooxml = 5.2.0
 selenium - java = 4.13.0
-chrome & chromedriver (stable) = 117.0.5938.149 (win-64)    
+chrome & chromedriver (stable) = 117.0.5938.149 (win-64)
+pesticide for chrome
 ```
 
 ***
